@@ -1,4 +1,4 @@
-#include "MyLibDec.h"
+﻿#include "MyLibDec.h"
 
 int MyDec(int i)
 {

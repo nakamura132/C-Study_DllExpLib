@@ -1,39 +1,12 @@
-#include <stdio.h>
-#include <windows.h>
-
-typedef int (*MYINC)(int i);
+ï»¿#include <stdio.h>
+#include "MyLibInc.h"
 
 int main()
 {
     printf("Start\n");
 
-    // DLL ‚ğ–¾¦“I‚Éƒ[ƒh‚·‚é
-    HMODULE hmodule = LoadLibrary("MyLibInc.dll");
-    if (hmodule == NULL)
-    {
-        printf("LoadLibrary, err=%d\n", GetLastError());
-        return 1;
-    }
-
-    // DLL ‚Ì’†‚É‚ ‚é“Á’è‚ÌŠÖ”‚ÌƒAƒhƒŒƒX‚ğæ“¾‚·‚é
-    MYINC fnMyInc = (MYINC)GetProcAddress(hmodule, "MyInc");
-    if (fnMyInc == NULL)
-    {
-        printf("GetProcAddress, err=%d\n", GetLastError());
-        return 1;
-    }
-
-    // DLL ‚Ì’†‚É‚ ‚é“Á’è‚ÌŠÖ”‚ğŒÄ‚Ño‚·
-    int i = fnMyInc(7);
+    int i = MyInc(13); // â˜… ã€Œãƒ—ãƒ©ã‚¹ 1 ã™ã‚‹é–¢æ•°ã€ã®å‘¼ã³å‡ºã—
     printf("i=%d\n", i);
-
-    // DLL ‚ğƒAƒ“ƒ[ƒh‚·‚é
-    BOOL bSuccess = FreeLibrary(hmodule);
-    if (!bSuccess)
-    {
-        printf("FreeLibrary, err=%d\n", GetLastError());
-        return 1;
-    }
 
     return 0;
 }
